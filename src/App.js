@@ -54,6 +54,9 @@ class App extends Component {
 
     return (
       <div className="App">
+        <h1>Segunda tarea del curso de React:</h1>
+        <p className="withLink"><a className="App-link" href="https://www.udemy.com/course/react-the-complete-guide-incl-redux/">https://www.udemy.com/course/react-the-complete-guide-incl-redux/</a></p>
+        <br/>
         <ol>
           <li>Create an input field (in App component) with a change listener which outputs the length of the entered text below it (e.g. in a paragraph).✔</li>
           <li>Create a new component (=> ValidationComponent) which receives the text length as a prop</li>
@@ -66,6 +69,7 @@ class App extends Component {
         <hr />
   
         <input type="text" onChange={this.changeInputHandler} value={this.state.inputVal} />
+
         <p>Length of your string: <span style={style}>{this.state.lengthInput}</span></p>
         <Validation strLength={this.state.lengthInput} />
 
