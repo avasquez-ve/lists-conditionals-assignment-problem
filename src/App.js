@@ -4,11 +4,13 @@ import Validation from './Validation/Validation';
 import Char from './Char/Char';
 
 class App extends Component {
+  // Mi state
   state = {
     inputVal: "",
     lengthInput: 0
   }
 
+  // Métodos
   changeInputHandler = (event) => {
     //Cómo no hacerlo en React
     /* const inputLength = event.target.value.length;
@@ -26,16 +28,28 @@ class App extends Component {
     })
   }
 
+  deleteCharHandler = (index) => {
+    const text = this.state.inputVal.split("");
+    text.splice(index, 1);
+    const updatedText = text.join("");
+    this.setState({
+      inputVal: updatedText,
+      lengthInput: updatedText.length
+    })
+  }
+
   render() {
+    // css en linea
     const style = {
       fontWeight: "bold"
     }
 
+    // Contenido dinámico
     let charComponentHtml = null;
     if (this.state.lengthInput > 0) {
-      charComponentHtml = (
-        <Char strValue={this.state.inputVal} strLength={this.state.lengthInput} />
-      )
+      charComponentHtml = this.state.inputVal.split("").map((char, index) => {
+        return <Char character={char} key={index} clicked={() => {this.deleteCharHandler(index)}} />
+      })
     }
 
     return (
@@ -51,7 +65,7 @@ class App extends Component {
         <p>Hint: Keep in mind that JavaScript strings are basically arrays!</p>
         <hr />
   
-        <input type="text" onChange={this.changeInputHandler} />
+        <input type="text" onChange={this.changeInputHandler} value={this.state.inputVal} />
         <p>Length of your string: <span style={style}>{this.state.lengthInput}</span></p>
         <Validation strLength={this.state.lengthInput} />
 
